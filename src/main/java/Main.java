@@ -8,19 +8,17 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-        ArrayList<Candies> list = new ArrayList<Candies>();
-        Box box = new Box(list);
+        Box box = new Box(new ArrayList<>());
 
-        list.add(new ChocolateCandies());
-        list.add(new ChocolateCandies());
-        list.add(new CaramelCandies());
-        list.add(new CaramelCandies());
-        list.add(new Marmalade());
-        list.add(new Marmalade());
-        list.add(new Marmalade());
-        list.add(new Marmalade());
+        box.addCandies(new ChocolateCandies());
+        box.addCandies(new Marmalade());
+        box.addCandies(new Marmalade());
+        box.addCandies(new CaramelCandies());
         box.allSweetsInformation();
+        box.allSweetsInformationAfterRebolance(1000,300);
+
     }
 }
+
 
 

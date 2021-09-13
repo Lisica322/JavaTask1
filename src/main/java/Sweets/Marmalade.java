@@ -3,6 +3,6 @@ package Sweets;
 public class Marmalade extends Candies {
 
     public Marmalade() {
-        super("Pchelka", 3.2, 2.9, "ellipse");
+        super("Pchelka", 350.2, 103.9, "ellipse");
     }
 }

@@ -46,4 +46,47 @@ public class Box implements Confections {
     public void allSweetsInformation() {
         System.out.format("Вес: %.2f\nСтоимость: %.2f\n%s, ", getWeightCandies(), getPriceSweets(), this.toString());
     }
+    public void allSweetsInformationAfterRebolance(double weight, double price) {
+        System.out.format("Вес: %.2f\nСтоимость: %.2f\n%s, ", removeWeightCandies(weight), removePriceCandies(price), this.toString());
+    }
+
+    public double removeWeightCandies(double maxWeightCandies) {
+        double weightBox = 0;
+        double minWeight = allCandiesList.get(0).getWeight();
+        for (int i = 0; i < allCandiesList.size(); i++) {
+            if (allCandiesList.get(i).getWeight() < minWeight) {
+                minWeight = allCandiesList.get(i).getWeight();
+            }
+            weightBox = weightBox + allCandiesList.get(i).getWeight();
+
+        }
+
+        while (!(weightBox == maxWeightCandies)) {
+            if (weightBox > maxWeightCandies) {
+                weightBox -= minWeight;
+
+            }
+            break;
+        }
+        return weightBox;
+    }
+
+    public double removePriceCandies(double maxPriceCandies) {
+        double priceBox = 0;
+        double minPrice = allCandiesList.get(0).getPrice();
+        for (int i = 0; i < allCandiesList.size(); i++) {
+            if (allCandiesList.get(i).getPrice() < minPrice) {
+                minPrice = allCandiesList.get(i).getPrice();
+            }
+            priceBox = priceBox + allCandiesList.get(i).getPrice();
+        }
+
+        while (!(priceBox == maxPriceCandies)) {
+            if (priceBox > maxPriceCandies) {
+                priceBox -= minPrice;
+            }
+            break;
+        }
+        return priceBox;
+    }
 }
