@@ -15,7 +15,8 @@ public class Main {
         box.addCandies(new Marmalade());
         box.addCandies(new CaramelCandies());
         box.allSweetsInformation();
-        box.allSweetsInformationAfterRebolance(1000,300);
+        box.allSweetsInformationAfterRebalancePrice(300);
+        box.allSweetsInformationAfterRebalanceWeight(1000);
 
     }
 }

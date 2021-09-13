@@ -46,8 +46,11 @@ public class Box implements Confections {
     public void allSweetsInformation() {
         System.out.format("Вес: %.2f\nСтоимость: %.2f\n%s, ", getWeightCandies(), getPriceSweets(), this.toString());
     }
-    public void allSweetsInformationAfterRebolance(double weight, double price) {
-        System.out.format("Вес: %.2f\nСтоимость: %.2f\n%s, ", removeWeightCandies(weight), removePriceCandies(price), this.toString());
+    public void allSweetsInformationAfterRebalanceWeight(double weight) {
+        System.out.format("Вес: %.2f\nСтоимость: %.2f\n%s, ", removeWeightCandies(weight), getPriceSweets(), this.toString());
+    }
+    public void allSweetsInformationAfterRebalancePrice(double price) {
+        System.out.format("Вес: %.2f\nСтоимость: %.2f\n%s, ", getWeightCandies(), removePriceCandies(price), this.toString());
     }
 
     public double removeWeightCandies(double maxWeightCandies) {
