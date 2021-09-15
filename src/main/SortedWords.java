@@ -1,6 +1,5 @@
 package main;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,8 +7,6 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static main.FilePathAdressesConst.FILE_CHANGES_PATH_POTTER;
 
 public class SortedWords {
 
@@ -27,28 +24,15 @@ public class SortedWords {
         return split;
     }
 
-    public static ArrayList<String> rewriteWords() {
+    public static ArrayList<String> rewriteWords(String[] split) {
         ArrayList<String> listPart = new ArrayList<>();
         ArrayList<String> resultList = new ArrayList<>();
-        try {
-            Collections.addAll(listPart, readTheFileText(FILE_CHANGES_PATH_POTTER));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            Collections.addAll(listPart, split);
         for (String s : listPart) {
             resultList.add(s.replaceAll("[^a-z^A-Z]", ""));
             for (int i = 0; i < resultList.size(); i++) {
                 resultList.removeIf(e -> e.equals(""));
             }
-        }
-        try {
-            try (FileWriter writer = new FileWriter(FILE_CHANGES_PATH_POTTER)) {
-                for (String news : resultList) {
-                    writer.write(news + System.getProperty("line.separator"));
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Не удалось записать данные в файл");
         }
         return resultList;
     }
@@ -69,16 +53,16 @@ public class SortedWords {
         System.out.println("Слова с максимальным кол-вом повторений:");
         int max = 0;
         TreeMap<String, Long> mapMax = new TreeMap<>();
-        for (Map.Entry<String, Long> pair : statsMap.entrySet()) {
-            if (pair.getValue() >= max) {
-                if (pair.getValue() > max) {
+        for(Map.Entry<String, Long> pair : statsMap.entrySet()){
+            if(pair.getValue() >= max){
+                if(pair.getValue() > max) {
                     max = Math.toIntExact(pair.getValue());
                     mapMax.clear();
                 }
                 mapMax.put(pair.getKey(), pair.getValue());
             }
         }
-        for (Map.Entry<String, Long> pair : mapMax.entrySet()) {
+        for(Map.Entry<String, Long> pair : mapMax.entrySet()){
             System.out.println(pair.getKey() + " повторяется: " + pair.getValue());
         }
     }
