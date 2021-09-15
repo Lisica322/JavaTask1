@@ -27,7 +27,7 @@ public class SortedWords {
     public static ArrayList<String> rewriteWords(String[] split) {
         ArrayList<String> listPart = new ArrayList<>();
         ArrayList<String> resultList = new ArrayList<>();
-            Collections.addAll(listPart, split);
+        Collections.addAll(listPart, split);
         for (String s : listPart) {
             resultList.add(s.replaceAll("[^a-z^A-Z]", ""));
             for (int i = 0; i < resultList.size(); i++) {
@@ -42,8 +42,9 @@ public class SortedWords {
                 incomeList
                         .stream()
                         .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        frequency.forEach((k, v) -> System.out.println(k + ": " + v));
+        TreeMap<String, Long> treeMap = new TreeMap<>();
+        treeMap.putAll(frequency);
+        treeMap.forEach((k, v) -> System.out.println(k + ": " + v));
         return frequency;
     }
 
@@ -53,16 +54,16 @@ public class SortedWords {
         System.out.println("Слова с максимальным кол-вом повторений:");
         int max = 0;
         TreeMap<String, Long> mapMax = new TreeMap<>();
-        for(Map.Entry<String, Long> pair : statsMap.entrySet()){
-            if(pair.getValue() >= max){
-                if(pair.getValue() > max) {
+        for (Map.Entry<String, Long> pair : statsMap.entrySet()) {
+            if (pair.getValue() >= max) {
+                if (pair.getValue() > max) {
                     max = Math.toIntExact(pair.getValue());
                     mapMax.clear();
                 }
                 mapMax.put(pair.getKey(), pair.getValue());
             }
         }
-        for(Map.Entry<String, Long> pair : mapMax.entrySet()){
+        for (Map.Entry<String, Long> pair : mapMax.entrySet()) {
             System.out.println(pair.getKey() + " повторяется: " + pair.getValue());
         }
     }
