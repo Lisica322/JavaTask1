@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Securities {
-    String name;
-    ArrayList<String> currency;
-    String code;
-    LocalDate date;
+    private String name;
+    private ArrayList<String> currency;
+    private String code;
+    private LocalDate date;
 
     public String getName() {
         return name;

@@ -23,30 +23,26 @@ public class Main {
 
             Companies[] companies = gson.fromJson(reader, Companies[].class);
 
+            System.out.println("Введите дату в формате dd/MM/YYYY или dd/MM/YY или dd.MM.YY или dd.MM.YYYY ");
+            BufferedReader inputData = new BufferedReader(new InputStreamReader(System.in));
+            String dataFormat = inputData.readLine();
+
             Stream.of(companies)
                     .forEach(company ->
                             System.out.println(
                                     String.join(
                                             "",
-                                            "(",
+                                            "'",
                                             company.getNameCompany(),
-                                            ") - '",
-                                                company.getFounded().toString(), "'")));
+                                            "' - '",
+                                            company.getFormatedFounded(dataFormat), "'")));
 
             List<Securities> securities =
                     UtilMetods.getFilteringSecurities(companies, s -> s.getDate().isBefore(LocalDate.now()));
 
-            System.out.println("Введите валюту для вывода id компании и code");
-            BufferedReader readerFromKeyBoard= new BufferedReader(new InputStreamReader(System.in));
-            String currency = readerFromKeyBoard.readLine();
-/***
- * Ввод валюты
- * **/
+            UtilMetods.returnCodeAndIdByCurrency(companies);
 
-            List<Securities> securities2 =
-                    UtilMetods.getFilteringSecurities(companies, s -> s.getCurrency().contains(currency));
-
-            System.out.println("Количество соответствующих организаций: " + securities.size());
+            System.out.println("Количество компаний до текущей даты " + securities.size());
 
             securities.forEach(System.out::println);
 
@@ -54,16 +50,10 @@ public class Main {
                     .now()
                     .minusYears(46);
 
+            System.out.println("======================================================");
             List<Companies> companiesByFoundationDate = UtilMetods.getFilteringCompanies(companies, c -> c.getFounded().isAfter(foundationDate));
 
             companiesByFoundationDate.forEach(System.out::println);
-
-
-
         }
-
     }
-
-
-
 }

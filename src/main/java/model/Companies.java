@@ -1,16 +1,17 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Companies {
-    String id;
-    String nameCompany;
-    String address;
-    String phoneNumber;
-    String inn;
-    LocalDate founded;
-    ArrayList<Securities> securities;
+    private String id;
+    private String nameCompany;
+    private String address;
+    private String phoneNumber;
+    private String inn;
+    private LocalDate founded;
+    private ArrayList<Securities> securities;
 
     public String getId() {
         return id;
@@ -36,6 +37,11 @@ public class Companies {
         return founded;
     }
 
+    public String getFormatedFounded(String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return founded.format(formatter);
+    }
+
     public ArrayList<Securities> getSecurities() {
         return securities;
     }
@@ -51,12 +57,5 @@ public class Companies {
                 ", founded=" + founded +
                 ", securities=" + securities +
                 '}';
-    }
-
-    public ArrayList<Securities> getFilterSecurities() {
-        LocalDate today = LocalDate.now();
-        securities.stream()
-                .filter(s -> s.getDate().isBefore(today));
-        return securities;
     }
 }
